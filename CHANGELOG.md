@@ -7,6 +7,22 @@ follows the suite's [VERSIONING.md](../../VERSIONING.md). This changelog starts
 2026-08-26 — earlier releases aren't backfilled; see `git log` or
 [docs/upgrading.md](../../docs/upgrading.md) for the story up to this point.
 
+## [4.7.0] — 2026-10-21
+
+> Dashboard panels for verified members only, and leechtime beside seedtime in a tracker's stats.
+
+### Added
+
+- **`DashboardPanel::verifiedOnly()`**, for a panel only a verified user sees, with optional
+  visibility of its own on top (#11070). The dashboard admits unverified users, while the
+  frontends' torrent routes need `verified`, so a panel showing torrents has to ask the same
+  question. It answers as Laravel's `verified` middleware does: a user model without
+  `MustVerifyEmail` passes, and guests never do. The README's Dashboard panels section
+  covers the gap.
+- **`TrackerStats::$leechtime`**, in seconds, beside seedtime (#11070). It's an optional
+  last constructor parameter defaulting to 0, so a tracker that doesn't report it still
+  constructs one. bloodhound 8.1 reports it.
+
 ## [4.6.0] — 2026-10-20
 
 > Contracts for members' seedboxes and live tracker sessions, so a frontend can manage both without knowing the tracker; accepts threepio 4.
